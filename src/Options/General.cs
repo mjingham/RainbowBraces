@@ -49,6 +49,11 @@ namespace RainbowBraces
         [DefaultValue(true)]
         public bool SquareBrackets { get; set; } = true;
 
+        [Category("Braces and brackets")]
+        [DisplayName("Colorize angle brackets [ ]")]
+        [Description("Determines whether or not angle brackets should be colorized.")]
+        [DefaultValue(true)]
+        public bool AngleBrackets { get; set; } = true;
 
         // Used for the rating prompt
         [Browsable(false)]

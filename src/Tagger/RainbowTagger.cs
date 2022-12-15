@@ -24,7 +24,7 @@ namespace RainbowBraces
         private List<ITagSpan<IClassificationTag>> _tags = new();
         private List<BracePair> _braces = new();
         private bool _isEnabled;
-        private static readonly Regex _regex = new(@"[\{\}\(\)\[\]]", RegexOptions.Compiled);
+        private static readonly Regex _regex = new(@"([\{\}\(\)\[\]<]|(?<!=)>)", RegexOptions.Compiled);
         private static readonly Span _empty = new(0, 0);
 
         public RainbowTagger(ITextView view, ITextBuffer buffer, IClassificationTypeRegistryService registry, ITagAggregator<IClassificationTag> aggregator)
@@ -191,6 +191,10 @@ namespace RainbowBraces
                     else if (options.SquareBrackets && (c == '[' || c == ']'))
                     {
                         BuildPairs(pairs, c, braceSpan, '[', ']');
+                    }
+                    else if (options.AngleBrackets && (c == '<' || c == '>'))
+                    {
+                        BuildPairs(pairs, c, braceSpan, '<', '>');
                     }
                 }
 
